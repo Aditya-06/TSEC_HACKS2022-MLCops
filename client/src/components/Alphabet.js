@@ -15,12 +15,12 @@ import { Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
-const domainName = [
-  { id: 23, name: 'Acturials' },
-  { id: 24, name: 'Architecture' },
-  { id: 35, name: 'Archeology' },
-  { id: 42, name: 'Ancient' },
-];
+// const data = [
+//   { id: 23, name: 'Acturials' },
+//   { id: 24, name: 'Architecture' },
+//   { id: 35, name: 'Archeology' },
+//   { id: 42, name: 'Ancient' },
+// ];
 
 const selectedArray = [24];
 
@@ -31,7 +31,7 @@ const flexContainer = {
   margin: '2rem 0',
 };
 
-const Alphabets = ({ letter = 'A' }) => {
+const Alphabets = ({ letter = 'A', data = [] }) => {
   const [selected, setSelected] = useState(selectedArray);
 
   const checkIfPresent = (id) => {
@@ -55,14 +55,14 @@ const Alphabets = ({ letter = 'A' }) => {
   };
   return (
     <>
-      <Typography variant="h5">{letter}</Typography>
+      <Typography variant="h5">{letter.toUpperCase()}</Typography>
       <Divider />
       <nav
         aria-label="main mailbox folders"
         style={{ marginBottom: '2rem', marginTop: '0.5rem' }}
       >
         <Stack direction="row" spacing={2}>
-          {domainName.map((item) => (
+          {data.map((item) => (
             <Button
               variant={checkIfPresent(item.id) ? 'contained' : 'outlined'}
               endIcon={checkIfPresent(item.id) ? <RemoveIcon /> : <AddIcon />}
