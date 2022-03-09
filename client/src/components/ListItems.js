@@ -12,10 +12,11 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import HomeIcon from '@mui/icons-material/Home';
 import { Link } from 'react-router-dom';
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
 
 export const mainListItems = (
   <React.Fragment>
-    <Link to="/" style={{ textDecoration: 'none', color: 'grey' }}>
+    <Link to="/home" style={{ textDecoration: 'none', color: 'grey' }}>
       <ListItemButton>
         <ListItemIcon>
           <HomeIcon />
@@ -23,7 +24,7 @@ export const mainListItems = (
         <ListItemText primary="Home" />
       </ListItemButton>
     </Link>
-    <Link to="/" style={{ textDecoration: 'none', color: 'grey' }}>
+    <Link to="/profile" style={{ textDecoration: 'none', color: 'grey' }}>
       <ListItemButton>
         <ListItemIcon>
           <PeopleIcon />
@@ -31,12 +32,20 @@ export const mainListItems = (
         <ListItemText primary="Profile" />
       </ListItemButton>
     </Link>
-    <Link to="domain" style={{ textDecoration: 'none', color: 'grey' }}>
+    <Link to="/domain" style={{ textDecoration: 'none', color: 'grey' }}>
       <ListItemButton>
         <ListItemIcon>
           <BorderColorIcon />
         </ListItemIcon>
         <ListItemText primary="Domain Selection" />
+      </ListItemButton>
+    </Link>
+    <Link to="/saved" style={{ textDecoration: 'none', color: 'grey' }}>
+      <ListItemButton>
+        <ListItemIcon>
+          <SaveAltIcon />
+        </ListItemIcon>
+        <ListItemText primary="Saved" />
       </ListItemButton>
     </Link>
   </React.Fragment>
@@ -45,25 +54,23 @@ export const mainListItems = (
 export const secondaryListItems = (
   <React.Fragment>
     <ListSubheader component="div" inset>
-      Saved reports
+      Recommender
     </ListSubheader>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Current month" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Last quarter" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Year-end sale" />
-    </ListItemButton>
+    <Link to="/upload" style={{ textDecoration: 'none', color: 'grey' }}>
+      <ListItemButton>
+        <ListItemIcon>
+          <AssignmentIcon />
+        </ListItemIcon>
+        <ListItemText primary="Upload PDF" />
+      </ListItemButton>
+    </Link>
+    <Link to="/title-rec" style={{ textDecoration: 'none', color: 'grey' }}>
+      <ListItemButton>
+        <ListItemIcon>
+          <AssignmentIcon />
+        </ListItemIcon>
+        <ListItemText primary="Generator" />
+      </ListItemButton>
+    </Link>
   </React.Fragment>
 );

@@ -57,7 +57,7 @@ export default function Signup() {
       addToast('Sign-up Successful!', { appearance: 'success' });
 
       try {
-        let data = JSON.stringify({
+        let dat = JSON.stringify({
           email,
           password: pass,
         });
@@ -68,12 +68,13 @@ export default function Signup() {
           headers: {
             'Content-Type': 'application/json',
           },
-          data: data,
+          data: dat,
         };
 
         const res = await axios(config);
         console.log(res.data);
-        addToast('Sign-up Successful!', { appearance: 'success' });
+        localStorage.setItem('token', response.data.data.tokens.access);
+        localStorage.setItem('info', data);
         history.push('/domain');
       } catch (e) {
         console.log(e);

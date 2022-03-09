@@ -42,9 +42,11 @@ export default function SignInSide() {
 
     try {
       const response = await axios(config);
+      // eslint-disable-next-line no-debugger
       localStorage.setItem('token', response.data.data.tokens.access);
+      localStorage.setItem('info', JSON.stringify({ email, pass }));
       addToast('Sign-in Successful!', { appearance: 'success' });
-      history.push('/');
+      history.push('/home');
     } catch (error) {
       addToast('Error!', { appearance: 'error' });
 

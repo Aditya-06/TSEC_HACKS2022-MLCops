@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -23,6 +23,7 @@ import Graph from './Graph';
 
 const PaperDetails = () => {
   const [open, setOpen] = React.useState(true);
+  const [data, setData] = useState(JSON.parse(localStorage.getItem('rPaper')));
 
   const handleClick = () => {
     setOpen(!open);
@@ -38,10 +39,7 @@ const PaperDetails = () => {
                   <ImageIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText
-                primary="Title"
-                secondary="The Solution to Everything: MNHP"
-              />
+              <ListItemText primary="Title" secondary={data.title} />
             </ListItem>
             <ListItem>
               <ListItemAvatar>
@@ -49,10 +47,7 @@ const PaperDetails = () => {
                   <WorkIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText
-                primary="Publisher"
-                secondary="Ajmera Publication"
-              />
+              <ListItemText primary="Publisher" secondary={data.publisher} />
             </ListItem>
             <ListItem>
               <ListItemAvatar>
@@ -60,10 +55,7 @@ const PaperDetails = () => {
                   <BeachAccessIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText
-                primary="Authors"
-                secondary="Aditya Ajmera, Amay Gada, Rushil Desai"
-              />
+              <ListItemText primary="Authors" secondary={data.authors} />
             </ListItem>
             <ListItem>
               <ListItemAvatar>
@@ -71,7 +63,7 @@ const PaperDetails = () => {
                   <ImageIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary="Date" secondary="2022-3-1" />
+              <ListItemText primary="Date" secondary={data.date} />
             </ListItem>
             <ListItem>
               <ListItemAvatar>
@@ -79,7 +71,7 @@ const PaperDetails = () => {
                   <WorkIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary="DOI" secondary="3289423989/32948" />
+              <ListItemText primary="DOI" secondary={data.doi} />
             </ListItem>
             <ListItem>
               <ListItemAvatar>
@@ -87,7 +79,10 @@ const PaperDetails = () => {
                   <BeachAccessIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary="Reference Count" secondary="29" />
+              <ListItemText
+                primary="Reference Count"
+                secondary={data.references}
+              />
             </ListItem>
             <ListItem>
               <ListItemAvatar>
@@ -95,7 +90,7 @@ const PaperDetails = () => {
                   <BeachAccessIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary="URL" secondary="www.google.com" />
+              <ListItemText primary="URL" secondary={data.url} />
             </ListItem>
           </List>
           <Paper
@@ -108,26 +103,13 @@ const PaperDetails = () => {
             }}
           >
             <Typography variant="h5">Abstract</Typography>
-            <Typography variant="subtitle1">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </Typography>
+            <Typography variant="subtitle1">{data.abstract}</Typography>
           </Paper>
 
           <List
             sx={{ width: '100%', bgcolor: 'background.paper' }}
             component="nav"
             aria-labelledby="nested-list-subheader"
-            subheader={
-              <ListSubheader component="div" id="nested-list-subheader">
-                Nested List Items
-              </ListSubheader>
-            }
           >
             <ListItemButton onClick={handleClick}>
               <ListItemIcon>
