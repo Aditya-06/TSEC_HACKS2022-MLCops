@@ -43,6 +43,7 @@ const Upload = () => {
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
+                    alignContent: 'center',
                     // height: '80vh',
                   }}
                 >
@@ -55,7 +56,9 @@ const Upload = () => {
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
-                    height: '70vh',
+                    alignContent: 'center',
+
+                    // height: '70vh',
                   }}
                 >
                   <PDFupload />
