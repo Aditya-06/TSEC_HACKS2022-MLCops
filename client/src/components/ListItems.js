@@ -8,17 +8,37 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import HomeIcon from '@mui/icons-material/Home';
 import { Link } from 'react-router-dom';
 
 export const mainListItems = (
   <React.Fragment>
-    <ListItemButton>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Profile" />
-    </ListItemButton>
+    <Link to="/" style={{ textDecoration: 'none', color: 'grey' }}>
+      <ListItemButton>
+        <ListItemIcon>
+          <HomeIcon />
+        </ListItemIcon>
+        <ListItemText primary="Home" />
+      </ListItemButton>
+    </Link>
+    <Link to="/" style={{ textDecoration: 'none', color: 'grey' }}>
+      <ListItemButton>
+        <ListItemIcon>
+          <PeopleIcon />
+        </ListItemIcon>
+        <ListItemText primary="Profile" />
+      </ListItemButton>
+    </Link>
+    <Link to="domain" style={{ textDecoration: 'none', color: 'grey' }}>
+      <ListItemButton>
+        <ListItemIcon>
+          <BorderColorIcon />
+        </ListItemIcon>
+        <ListItemText primary="Domain Selection" />
+      </ListItemButton>
+    </Link>
   </React.Fragment>
 );
 
