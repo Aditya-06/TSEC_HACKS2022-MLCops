@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,18 +13,43 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link as NavLink } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useToasts } from 'react-toast-notifications';
+import axios from 'axios';
 
 const theme = createTheme();
 
 export default function SignInSide() {
-  const handleSubmit = (event) => {
+  const history = useHistory();
+  const { addToast } = useToasts();
+  const [email, setEmail] = useState('');
+  const [pass, setPass] = useState('');
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+    let data = JSON.stringify({
+      email,
+      password: pass,
     });
+
+    let config = {
+      method: 'post',
+      url: '/auth/token/',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    };
+
+    try {
+      const response = await axios(config);
+      localStorage.setItem('token', response.data.data.tokens.access);
+      addToast('Sign-in Successful!', { appearance: 'success' });
+      history.push('/');
+    } catch (error) {
+      addToast('Error!', { appearance: 'error' });
+
+      console.log(error);
+    }
   };
 
   return (
@@ -78,6 +103,8 @@ export default function SignInSide() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 // autoFocus
               />
               <TextField
@@ -88,6 +115,8 @@ export default function SignInSide() {
                 label="Password"
                 type="password"
                 id="password"
+                value={pass}
+                onChange={(e) => setPass(e.target.value)}
                 autoComplete="current-password"
               />
               <FormControlLabel

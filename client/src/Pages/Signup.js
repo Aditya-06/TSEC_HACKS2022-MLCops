@@ -15,10 +15,13 @@ import {
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useToasts } from 'react-toast-notifications';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const theme = createTheme();
 
 export default function Signup() {
+  const history = useHistory();
   const [fname, setFname] = useState('');
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
@@ -26,13 +29,60 @@ export default function Signup() {
 
   const { addToast } = useToasts();
   // Handle the Sign-up of the user
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     // eslint-disable-next-line no-console
     console.log(
       `email: ${email}\npassword: ${pass}\nFirst name: ${fname}\nLast Name: ${lname}`
     );
-    addToast('Sign-up Successful!', { appearance: 'success' });
+
+    let data = JSON.stringify({
+      name: fname + lname,
+      email,
+      password: pass,
+    });
+
+    let config = {
+      method: 'post',
+      url: '/auth/register/',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    };
+
+    try {
+      const response = await axios(config);
+      console.log(response.data);
+      addToast('Sign-up Successful!', { appearance: 'success' });
+
+      try {
+        let data = JSON.stringify({
+          email,
+          password: pass,
+        });
+
+        let config = {
+          method: 'post',
+          url: '/auth/token/',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          data: data,
+        };
+
+        const res = await axios(config);
+        console.log(res.data);
+        addToast('Sign-up Successful!', { appearance: 'success' });
+        history.push('/domain');
+      } catch (e) {
+        console.log(e);
+        addToast('Error', { appearance: 'error' });
+      }
+    } catch (error) {
+      console.log(error);
+      addToast('Error', { appearance: 'error' });
+    }
   };
 
   return (
