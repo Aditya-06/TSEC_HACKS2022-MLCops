@@ -31,8 +31,8 @@ const flexContainer = {
   margin: '2rem 0',
 };
 
-const Alphabets = ({ letter = 'A', data = [] }) => {
-  const [selected, setSelected] = useState(selectedArray);
+const Alphabets = ({ letter = 'A', data = [], selected, setSelected }) => {
+  // const [selected, setSelected] = useState(selectedArray);
 
   const checkIfPresent = (id) => {
     return selected.includes(id);
@@ -66,6 +66,7 @@ const Alphabets = ({ letter = 'A', data = [] }) => {
             <Button
               variant={checkIfPresent(item.id) ? 'contained' : 'outlined'}
               endIcon={checkIfPresent(item.id) ? <RemoveIcon /> : <AddIcon />}
+              style={{ overflow: 'hidden' }}
               key={item.id}
               onClick={(e) => toggleSelection(e, item.id)}
             >
