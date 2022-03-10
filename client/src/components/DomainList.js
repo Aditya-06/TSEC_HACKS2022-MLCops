@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Box from '@mui/material/Box';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import Alphabets from './Alphabet';
 
 const DomainList = ({ selected, setSelected }) => {
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleToggle = () => {
+    setOpen(!open);
+  };
   const [resDomaina, setResDomaina] = useState([]);
   // const [selected, setSelected] = useState([]);
   const callGlobalDomains = async () => {
+    setOpen(true);
     let config = {
       method: 'get',
       url: '/workflow/global_domain/',
@@ -17,6 +27,7 @@ const DomainList = ({ selected, setSelected }) => {
     try {
       const response = await axios(config);
       setResDomaina(response.data.details);
+      setOpen(false);
     } catch (error) {
       console.log(error);
     }
@@ -66,6 +77,13 @@ const DomainList = ({ selected, setSelected }) => {
         />
       ))}
       {/* <Alphabets letter="B" /> */}
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+        // onClick={handleClose}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </Box>
   );
 };

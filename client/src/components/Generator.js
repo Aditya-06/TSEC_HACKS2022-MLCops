@@ -9,10 +9,19 @@ import {
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import axios from 'axios';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import React, { useState, useEffect } from 'react';
 
 const Generator = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleToggle = () => {
+    setOpen(!open);
+  };
   const [title, setTitle] = useState('');
   const [abstract, setAbstract] = useState('');
   const [keywords, setKeywords] = useState('');
@@ -25,6 +34,7 @@ const Generator = () => {
   };
 
   const callApi = async () => {
+    setOpen(true);
     let data = JSON.stringify({
       abstract,
     });
@@ -46,6 +56,7 @@ const Generator = () => {
     } catch (error) {
       console.log(error);
     }
+    setOpen(false);
   };
   return (
     <>
@@ -123,6 +134,13 @@ const Generator = () => {
           </Button>
         </Grid>
       </Grid>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+        onClick={handleClose}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </>
   );
 };

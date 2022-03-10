@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Graph from 'react-graph-vis';
+import axios from 'axios';
+import { CompressOutlined } from '@mui/icons-material';
+import { useHistory } from 'react-router-dom';
 
 // import './styles.css';
 // import './network.css';
@@ -28,6 +31,7 @@ function randomColor() {
 }
 
 function GraphPage() {
+  const history = useHistory();
   const createNode = (x, y) => {
     const color = randomColor();
     setState(({ graph: { nodes, edges }, counter, ...rest }) => {
@@ -43,15 +47,26 @@ function GraphPage() {
       };
     });
   };
+
+  const getname = (arr, id) => {
+    for (let i = 0; i < arr.length; i += 1) {
+      // eslint-disable-next-line no-debugger
+      if (arr[i].id == id) {
+        return arr[i].label;
+      }
+    }
+  };
+
   const [state, setState] = useState({
     counter: 5,
+
     graph: {
       nodes: [
-        { id: 1, label: 'Node 1', color: '#e04141' },
-        { id: 2, label: 'Node 2', color: '#e09c41' },
-        { id: 3, label: 'Node 3', color: '#e0df41' },
-        { id: 4, label: 'Node 4', color: '#7be041' },
-        { id: 5, label: 'Node 5', color: '#41e0c9' },
+        { id: 1, label: 'Node 1' },
+        { id: 2, label: 'Node 2' },
+        { id: 3, label: 'Node 3' },
+        { id: 4, label: 'Node 4' },
+        { id: 5, label: 'Node 5' },
       ],
       edges: [
         { from: 1, to: 2 },
@@ -73,6 +88,53 @@ function GraphPage() {
       },
     },
   });
+
+  useEffect(() => {
+    let data = JSON.stringify({
+      // author: `${JSON.parse(localStorage.getItem('rPaper')).authors}`
+      author: 'Mehta Bhairav',
+    });
+
+    let config = {
+      method: 'post',
+      url: '/workflow/graph/',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then((response) => {
+        const data = response.data;
+        console.log(JSON.stringify(response.data));
+        console.log(data);
+        // eslint-disable-next-line no-debugger
+        setState({
+          counter: data.details.nodes.length,
+
+          graph: {
+            nodes: data.details.nodes,
+            edges: data.details.edges,
+          },
+          events: {
+            select: ({ nodes, edges }) => {
+              // alert('Selected node: ' + getname(data.details.nodes, nodes));
+              localStorage.setItem(
+                'author',
+                getname(data.details.nodes, nodes)
+              );
+              history.push('/author');
+            },
+          },
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   const { graph, events } = state;
   return (
     <div>

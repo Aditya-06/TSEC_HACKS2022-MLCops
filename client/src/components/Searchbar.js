@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import { Box, Button, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import axios from 'axios';
 
-const Searchbar = () => {
+const Searchbar = ({ setCall, setKey }) => {
   const [input, setInput] = useState('');
-  const submitSearchInput = (e) => {
+  const submitSearchInput = async (e) => {
+    if (input !== '') {
+      setCall(true);
+      setKey(input);
+    }
     e.preventDefault();
-    // eslint-disable-next-line no-console
+
     console.log(`Serach: ${input}`);
   };
   return (

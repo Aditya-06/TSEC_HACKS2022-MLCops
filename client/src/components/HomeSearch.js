@@ -4,9 +4,12 @@ import PaperCard from './Card';
 import axios from 'axios';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import { Button, TextField } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
 const Reccomended = ({ call = false, key, setCall }) => {
   const [open, setOpen] = React.useState(false);
+  const [input, setInput] = useState('');
   const handleClose = () => {
     setOpen(false);
   };
@@ -36,6 +39,7 @@ const Reccomended = ({ call = false, key, setCall }) => {
       setOpen(false);
     } catch (error) {
       console.log(error);
+      setOpen(false);
     }
   };
   useEffect(() => {
@@ -43,8 +47,9 @@ const Reccomended = ({ call = false, key, setCall }) => {
   }, []);
 
   const keyRec = async () => {
+    setOpen(true);
     let data = JSON.stringify({
-      search_key: key,
+      search_key: input,
     });
 
     let config = {
@@ -60,20 +65,57 @@ const Reccomended = ({ call = false, key, setCall }) => {
     try {
       const response = await axios(config);
       setData(response.data.details);
+      setOpen(false);
     } catch (error) {
       console.log(error);
+      setOpen(false);
     }
   };
 
-  useEffect(() => {
-    if (call) {
-      keyRec();
-      setCall(false);
-    }
-  }, [call]);
-
   return (
     <div>
+      <Box
+        sx={{
+          display: 'flex',
+          // justifyContent: 'center',
+        }}
+      >
+        <Box
+          component="form"
+          noValidate
+          autoComplete="off"
+          sx={{
+            width: '85%',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <TextField
+            fullWidth
+            id="outlined-basic"
+            label="Search"
+            variant="outlined"
+            size="small"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+        </Box>
+        <Box
+          component="form"
+          noValidate
+          autoComplete="off"
+          sx={{
+            width: '5%',
+            display: 'flex',
+            alignItems: 'center',
+            margin: '0.5rem',
+          }}
+        >
+          <Button onClick={(e) => keyRec(e)}>
+            <SearchIcon />
+          </Button>
+        </Box>
+      </Box>
       <Box>
         {data ? (
           data.map((rPaper) => (

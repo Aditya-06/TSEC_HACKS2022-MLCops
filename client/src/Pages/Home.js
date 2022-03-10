@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {
   CssBaseline,
@@ -7,14 +7,19 @@ import {
   Container,
   Grid,
   Paper,
+  Typography,
 } from '@mui/material';
 import Navigation from '../components/Navigation';
 import Searchbar from '../components/Searchbar';
 import Reccomended from '../components/Reccomended';
+import HomeSearch from '../components/HomeSearch';
+import logo from '../logo.gif';
 
 const mdTheme = createTheme();
 
 function DashboardContent() {
+  const [key, setKey] = useState('');
+  const [call, setCall] = useState(false);
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -42,14 +47,30 @@ function DashboardContent() {
                   sx={{
                     p: 2,
                     display: 'flex',
+                    justifyContent: 'center',
                     flexDirection: 'column',
+                    alignContent: 'center',
                     height: 240,
+                    overflow: 'hidden',
+                    backgroundImage:
+                      'url(https://image.shutterstock.com/image-vector/liquid-color-background-design-fluid-260nw-1408596326.jpg)',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
                   }}
                 >
-                  {/* <Chart /> */}
+                  {/* <Typography
+                    variant="h2"
+                    style={{
+                      color: 'whitesmoke',
+                      diplay: 'flex',
+                      justifyContent: 'center',
+                      justifySelf: 'center',
+                    }}
+                  >
+                    Research Paper Recommender
+                  </Typography> */}
                 </Paper>
               </Grid>
-              {/* Recent Deposits */}
               <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
@@ -59,15 +80,14 @@ function DashboardContent() {
                     height: 240,
                   }}
                 >
-                  {/* <Deposits /> */}
+                  <img src={logo} alt="typing"></img>
                 </Paper>
               </Grid>
-              {/* Recent Orders */}
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Searchbar />
+                  <Searchbar key={key} setKey={setKey} setCall={setCall} />
                 </Paper>
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
                 <Paper
                   sx={{
@@ -77,7 +97,7 @@ function DashboardContent() {
                     // height: '50vh',
                   }}
                 >
-                  <Reccomended />
+                  <HomeSearch call={call} key={key} setCall={setCall} />
                 </Paper>
               </Grid>
             </Grid>

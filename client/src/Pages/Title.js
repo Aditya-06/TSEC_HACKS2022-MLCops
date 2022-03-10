@@ -9,21 +9,41 @@ import {
   Paper,
   Typography,
   Button,
-  Divider,
 } from '@mui/material';
+import axios from 'axios';
 
 import Navigation from '../components/Navigation';
-import PaperDetails from '../components/PaperDetails';
-import Graph from '../components/Graph';
+import Generator from '../components/Generator';
 
 const mdTheme = createTheme();
 
-const LearnMore = () => {
-  const [data, setData] = useState(JSON.parse(localStorage.getItem('rPaper')));
+const Title = () => {
+  const [selected, setSelected] = useState([]);
+  const saveChanges = async (e) => {
+    e.preventDefault();
+    let data = JSON.stringify({
+      domains: selected,
+    });
 
+    let config = {
+      method: 'post',
+      url: '/workflow/domain/',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    };
+
+    try {
+      const response = await axios(config);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <ThemeProvider theme={mdTheme}>
-      <Box sx={{ display: 'flex', width: '100%' }}>
+      <Box sx={{ display: 'flex' }}>
         <CssBaseline />
 
         <Navigation />
@@ -52,10 +72,11 @@ const LearnMore = () => {
                     // height: '80vh',
                   }}
                 >
-                  <Typography variant="h4">Research Paper Details</Typography>
+                  <Typography variant="h4">Auto Generate Title</Typography>
                 </Paper>
               </Grid>
-              <Grid item xs={12} md={9} lg={6}>
+
+              <Grid item xs={12} md={12} lg={12}>
                 <Paper
                   sx={{
                     p: 2,
@@ -64,29 +85,7 @@ const LearnMore = () => {
                     // height: '80vh',
                   }}
                 >
-                  <PaperDetails />
-                </Paper>
-              </Grid>
-              <Grid item xs={12} md={3} lg={6}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                  }}
-                >
-                  <Graph />
-                  <Divider />
-                  <a
-                    href="/"
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      textDecoration: 'none',
-                    }}
-                  >
-                    <Button fullWidth>Go to PDF</Button>
-                  </a>
+                  <Generator />
                 </Paper>
               </Grid>
             </Grid>
@@ -97,4 +96,4 @@ const LearnMore = () => {
   );
 };
 
-export default LearnMore;
+export default Title;
