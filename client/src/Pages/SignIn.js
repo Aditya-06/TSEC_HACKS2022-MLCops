@@ -121,10 +121,7 @@ export default function SignInSide() {
                 onChange={(e) => setPass(e.target.value)}
                 autoComplete="current-password"
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
+
               <Button
                 type="submit"
                 fullWidth
@@ -134,11 +131,6 @@ export default function SignInSide() {
                 Sign In
               </Button>
               <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
                 <Grid item>
                   <NavLink to="/sign-up" variant="body2">
                     {"Don't have an account? Sign Up"}

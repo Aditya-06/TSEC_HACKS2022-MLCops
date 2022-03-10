@@ -14,6 +14,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import { Link } from 'react-router-dom';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import SearchIcon from '@mui/icons-material/Search';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 export const mainListItems = (
   <React.Fragment>
@@ -68,17 +69,9 @@ export const secondaryListItems = (
     <Link to="/title-rec" style={{ textDecoration: 'none', color: 'grey' }}>
       <ListItemButton>
         <ListItemIcon>
-          <AssignmentIcon />
+          <SettingsIcon />
         </ListItemIcon>
         <ListItemText primary="Generator" />
-      </ListItemButton>
-    </Link>
-    <Link to="/doi-search" style={{ textDecoration: 'none', color: 'grey' }}>
-      <ListItemButton>
-        <ListItemIcon>
-          <SearchIcon />
-        </ListItemIcon>
-        <ListItemText primary="DOI Search" />
       </ListItemButton>
     </Link>
   </React.Fragment>

@@ -17,6 +17,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useToasts } from 'react-toast-notifications';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { Link as NavLink } from 'react-router-dom';
 
 const theme = createTheme();
 
@@ -73,7 +74,7 @@ export default function Signup() {
 
         const res = await axios(config);
         console.log(res.data);
-        localStorage.setItem('token', response.data.data.tokens.access);
+        localStorage.setItem('token', res.data.data.tokens.access);
         localStorage.setItem('info', data);
         history.push('/domain');
       } catch (e) {
@@ -91,7 +92,7 @@ export default function Signup() {
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
 
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid item xs={12} sm={8} md={4} component={Paper} elevation={6} square>
           <Box
             sx={{
               my: 8,
@@ -163,14 +164,7 @@ export default function Signup() {
                     onChange={(e) => setPass(e.target.value)}
                   />
                 </Grid>
-                <Grid item xs={12}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox value="allowExtraEmails" color="primary" />
-                    }
-                    label="I want to receive inspiration, marketing promotions and updates via email."
-                  />
-                </Grid>
+                <Grid item xs={12}></Grid>
               </Grid>
               <Button
                 type="submit"
@@ -182,9 +176,9 @@ export default function Signup() {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <NavLink to="/sign-in">
                     Already have an account? Sign in
-                  </Link>
+                  </NavLink>
                 </Grid>
               </Grid>
             </Box>
@@ -194,7 +188,7 @@ export default function Signup() {
           item
           xs={false}
           sm={4}
-          md={7}
+          md={8}
           sx={{
             backgroundImage:
               'url(https://ncm.cikd.ca/wp-content/uploads/2021/12/Best-title-870x450.jpg)',

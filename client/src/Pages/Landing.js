@@ -93,8 +93,7 @@ const Landing = () => {
               }}
             >
               <Typography variant="h6" style={{ color: 'lightgrey' }}>
-                In some situations, you may not be allowed to connect to a font
-                repository online and link/load it.
+                Erradicating the Re from Research!
               </Typography>
             </Box>
           </Grid>

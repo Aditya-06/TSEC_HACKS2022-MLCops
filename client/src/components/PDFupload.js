@@ -18,6 +18,34 @@ const PDFupload = () => {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState([]);
 
+  const submitDOI = async (e) => {
+    e.preventDefault();
+    const axios = require('axios');
+    let data = JSON.stringify({
+      doi,
+    });
+
+    let config = {
+      method: 'put',
+      url: '/workflow/recommend_home/',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        setTitle(response.data.details.title);
+        setAbstract(response.data.details.abstract);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const handleSelection = async (e) => {
     setOpen(true);
     setSelectedPdf(e.target.files[0]);
@@ -133,7 +161,7 @@ const PDFupload = () => {
         spacing={2}
         style={{ marginTop: '2rem', marginBottom: '2rem' }}
       >
-        <Grid item sm={12} lg={12}>
+        <Grid item sm={12} lg={9}>
           <TextField
             label="DOI"
             value={doi}
@@ -142,6 +170,16 @@ const PDFupload = () => {
             color={'primary'}
             onChange={(e) => setDoi(e.target.value)}
           />
+        </Grid>
+        <Grid
+          item
+          sm={12}
+          lg={3}
+          style={{ display: 'flex', justifyContent: 'center' }}
+        >
+          <Button variant="contained" fullWidth onClick={(e) => submitDOI(e)}>
+            Confirm
+          </Button>
         </Grid>
       </Grid>
       <Divider />

@@ -78,7 +78,7 @@ const LearnMore = () => {
                   <Graph />
                   <Divider />
                   <a
-                    href="/"
+                    href={data.url}
                     style={{
                       display: 'flex',
                       justifyContent: 'center',

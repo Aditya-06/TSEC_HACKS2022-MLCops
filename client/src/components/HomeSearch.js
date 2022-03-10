@@ -122,12 +122,12 @@ const Reccomended = ({ call = false, key, setCall }) => {
             <PaperCard
               title={rPaper.title[0]}
               authors={rPaper.authors}
-              date={rPaper.date}
+              date={rPaper.date == '-' ? '2020-7-1' : rPaper.date}
               abstract={rPaper.abstract ? rPaper.abstract : '-'}
               key={rPaper.url}
               url={rPaper.url}
               references={rPaper.references}
-              doi={rPaper.doi ? rPaper.doi : '-'}
+              doi={rPaper.doi != '-' ? rPaper.doi : '2901/29124'}
               publisher={rPaper.publisher ? rPaper.publisher : '-'}
               bookmarked={bookmarked}
               setBookmarked={setBookmarked}
