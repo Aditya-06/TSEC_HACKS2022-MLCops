@@ -45,6 +45,7 @@ export default function SignInSide() {
       // eslint-disable-next-line no-debugger
       localStorage.setItem('token', response.data.data.tokens.access);
       localStorage.setItem('info', JSON.stringify({ email }));
+      localStorage.setItem('bookmarked', '[]');
       addToast('Sign-in Successful!', { appearance: 'success' });
       history.push('/home');
     } catch (error) {

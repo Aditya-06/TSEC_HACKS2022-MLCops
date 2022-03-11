@@ -27,13 +27,15 @@ const SavedPaper = () => {
   return (
     <div>
       <Box>
-        {data ? (
+        {data && data.length > 0 ? (
           data.map((rPaper) => {
             // eslint-disable-next-line no-debugger
             if (rPaper != ']' && rPaper != '[') {
               return (
                 <PaperCard
-                  title={rPaper.title ? rPaper.title[0] : '-'}
+                  title={
+                    Array.isArray(rPaper.title) ? rPaper.title[0] : rPaper.title
+                  }
                   authors={rPaper.authors ? rPaper.authors : '-'}
                   date={rPaper.date ? rPaper.date : '-'}
                   abstract={rPaper.abstract ? rPaper.abstract : '-'}

@@ -13,6 +13,7 @@ import Title from './Pages/Title';
 import Saved from './Pages/Saved';
 import DOI from './Pages/DOI';
 import Author from './Pages/Author';
+import KeySearch from './Pages/keySearch';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ToastProvider } from 'react-toast-notifications';
@@ -65,6 +66,9 @@ function App() {
           </Route>
           <Route exact path="/author">
             <Author />
+          </Route>
+          <Route exact path="/key-search/:key">
+            <KeySearch />
           </Route>
         </Switch>
       </Router>
