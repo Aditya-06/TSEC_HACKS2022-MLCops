@@ -55,7 +55,7 @@ const DomainList = ({ selected, setSelected }) => {
       const resObj = response.data.details;
       const idArr = getIds(resObj);
       // eslint-disable-next-line no-debugger
-      debugger;
+    
       setSelected(idArr);
     } catch (error) {
       console.log(error);

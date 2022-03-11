@@ -240,12 +240,12 @@ const PDFupload = () => {
           <UploadRes data={data} />
         </Grid>
       </Grid>
-      {/* <Backdrop
+      <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={false}
       >
         <CircularProgress color="inherit" />
-      </Backdrop> */}
+      </Backdrop>
     </>
   );
 };

@@ -100,11 +100,11 @@ const Navigation = () => {
           >
             MLCops
           </Typography>
-          <IconButton color="inherit">
+          {/* <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge>
-          </IconButton>
+          </IconButton> */}
           <Link to="/sign-in" style={{ textDecoration: 'none' }}>
             <IconButton color="inherit">
               {/* <Badge badgeContent={4} color="secondary"> */}

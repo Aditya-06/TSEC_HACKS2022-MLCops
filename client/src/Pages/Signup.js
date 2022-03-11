@@ -75,6 +75,8 @@ export default function Signup() {
         const res = await axios(config);
         console.log(res.data);
         localStorage.setItem('token', res.data.data.tokens.access);
+        localStorage.setItem('bookmarked', '[]');
+
         localStorage.setItem('info', data);
         history.push('/domain');
       } catch (e) {

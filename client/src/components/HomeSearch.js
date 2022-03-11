@@ -6,8 +6,10 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Button, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { useHistory } from 'react-router-dom';
 
 const Reccomended = ({ call = false, key, setCall }) => {
+  const history = useHistory();
   const [open, setOpen] = React.useState(false);
   const [input, setInput] = useState('');
   const handleClose = () => {
@@ -17,12 +19,13 @@ const Reccomended = ({ call = false, key, setCall }) => {
     setOpen(!open);
   };
   const [data, setData] = useState([]);
+  const [inputData, setInputData] = useState([]);
   const [bookmarked, setBookmarked] = useState(
     JSON.parse(localStorage.getItem('bookmarked'))
   );
   const getRecc = async () => {
     setOpen(true);
-    let data = '';
+    let data_in = '';
 
     let config = {
       method: 'get',
@@ -30,7 +33,7 @@ const Reccomended = ({ call = false, key, setCall }) => {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
-      data: data,
+      data: data_in,
     };
 
     try {
@@ -47,29 +50,34 @@ const Reccomended = ({ call = false, key, setCall }) => {
   }, []);
 
   const keyRec = async () => {
-    setOpen(true);
-    let data = JSON.stringify({
-      search_key: input,
-    });
+    history.push(`/key-search/${input.replace(' ', '-')}`);
+    // setOpen(true);
 
-    let config = {
-      method: 'post',
-      url: '/workflow/recommend_home/',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-        'Content-Type': 'application/json',
-      },
-      data: data,
-    };
+    // let data_input = JSON.stringify({
+    //   search_key: input,
+    // });
 
-    try {
-      const response = await axios(config);
-      setData(response.data.details);
-      setOpen(false);
-    } catch (error) {
-      console.log(error);
-      setOpen(false);
-    }
+    // let config = {
+    //   method: 'post',
+    //   url: '/workflow/recommend_home/',
+    //   headers: {
+    //     Authorization: `Bearer ${localStorage.getItem('token')}`,
+    //     'Content-Type': 'application/json',
+    //   },
+    //   data: data_input,
+    // };
+
+    // try {
+    //   const response = await axios(config);
+    //   console.log(response.data.details);
+    //   setInputData(response.data.details);
+    //   setData(response.data.details);
+    //   setOpen(false);
+
+    // } catch (error) {
+    //   console.log(error);
+    //   setOpen(false);
+    // }
   };
 
   return (
@@ -117,17 +125,33 @@ const Reccomended = ({ call = false, key, setCall }) => {
         </Box>
       </Box>
       <Box>
-        {data ? (
+        {inputData.length > 0 ? (
+          inputData.map((rPaper) => (
+            <PaperCard
+              title={rPaper.title[0]}
+              authors={rPaper.authors}
+              // date={rPaper.date == '-' ? '2020-7-1' : rPaper.date}
+              abstract={rPaper.abstract ? rPaper.abstract : '-'}
+              key={rPaper.url + rPaper.title[0]}
+              url={rPaper.url}
+              references={rPaper.references}
+              // doi={rPaper.doi != '-' ? rPaper.doi : '2901/29124'}
+              publisher={rPaper.publisher ? rPaper.publisher : '-'}
+              bookmarked={bookmarked}
+              setBookmarked={setBookmarked}
+            />
+          ))
+        ) : data ? (
           data.map((rPaper) => (
             <PaperCard
               title={rPaper.title[0]}
               authors={rPaper.authors}
-              date={rPaper.date == '-' ? '2020-7-1' : rPaper.date}
+              // date={rPaper.date == '-' ? '2020-7-1' : rPaper.date}
               abstract={rPaper.abstract ? rPaper.abstract : '-'}
-              key={rPaper.url}
+              key={rPaper.url + rPaper.title[0]}
               url={rPaper.url}
               references={rPaper.references}
-              doi={rPaper.doi != '-' ? rPaper.doi : '2901/29124'}
+              // doi={rPaper.doi != '-' ? rPaper.doi : '2901/29124'}
               publisher={rPaper.publisher ? rPaper.publisher : '-'}
               bookmarked={bookmarked}
               setBookmarked={setBookmarked}

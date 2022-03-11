@@ -4,6 +4,7 @@ import Graph from 'react-graph-vis';
 import axios from 'axios';
 import { CompressOutlined } from '@mui/icons-material';
 import { useHistory } from 'react-router-dom';
+import { data } from 'vis-network';
 
 // import './styles.css';
 // import './network.css';
@@ -31,6 +32,8 @@ function randomColor() {
 }
 
 function GraphPage() {
+  // const [data, setData] = useState(JSON.parse(localStorage.getItem('rPaper')));
+
   const history = useHistory();
   const createNode = (x, y) => {
     const color = randomColor();
@@ -90,9 +93,11 @@ function GraphPage() {
   });
 
   useEffect(() => {
+    const auth = JSON.parse(localStorage.getItem('rPaper')).authors.toString();
     let data = JSON.stringify({
-      // author: `${JSON.parse(localStorage.getItem('rPaper')).authors}`
-      author: 'Mehta Bhairav',
+      author: `${auth.split(',')[0]}`,
+      // author: data.author,
+      // author: 'Mehta Bhairav',
     });
 
     let config = {
