@@ -1,27 +1,16 @@
-import {
-  Button,
-  Grid,
-  Fab,
-  Box,
-  TextField,
-  Divider,
-  Typography,
-} from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+import { Button, Grid, TextField, Divider, Typography } from '@mui/material';
 import axios from 'axios';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const Generator = () => {
   const [open, setOpen] = React.useState(false);
   const handleClose = () => {
     setOpen(false);
   };
-  const handleToggle = () => {
-    setOpen(!open);
-  };
+
   const [title, setTitle] = useState('');
   const [abstract, setAbstract] = useState('');
   const [keywords, setKeywords] = useState('');

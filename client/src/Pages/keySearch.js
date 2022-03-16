@@ -8,13 +8,11 @@ import {
   Grid,
   Paper,
   Typography,
-  Button,
 } from '@mui/material';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 import Navigation from '../components/Navigation';
-import Generator from '../components/Generator';
 import PaperCard from '../components/Card';
 
 const mdTheme = createTheme();

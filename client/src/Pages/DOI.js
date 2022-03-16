@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {
   CssBaseline,
@@ -8,9 +8,7 @@ import {
   Grid,
   Paper,
   Typography,
-  Button,
 } from '@mui/material';
-import axios from 'axios';
 
 import Navigation from '../components/Navigation';
 import Generator from '../components/Generator';
@@ -18,29 +16,6 @@ import Generator from '../components/Generator';
 const mdTheme = createTheme();
 
 const DOI = () => {
-  const [selected, setSelected] = useState([]);
-  const saveChanges = async (e) => {
-    e.preventDefault();
-    let data = JSON.stringify({
-      domains: selected,
-    });
-
-    let config = {
-      method: 'post',
-      url: '/workflow/domain/',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-        'Content-Type': 'application/json',
-      },
-      data: data,
-    };
-
-    try {
-      const response = await axios(config);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>

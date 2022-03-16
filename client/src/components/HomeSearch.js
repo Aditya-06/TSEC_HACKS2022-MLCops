@@ -8,18 +8,12 @@ import { Button, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useHistory } from 'react-router-dom';
 
-const Reccomended = ({ call = false, key, setCall }) => {
+const Reccomended = () => {
   const history = useHistory();
   const [open, setOpen] = React.useState(false);
   const [input, setInput] = useState('');
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleToggle = () => {
-    setOpen(!open);
-  };
+
   const [data, setData] = useState([]);
-  const [inputData, setInputData] = useState([]);
   const [bookmarked, setBookmarked] = useState(
     JSON.parse(localStorage.getItem('bookmarked'))
   );
@@ -51,33 +45,6 @@ const Reccomended = ({ call = false, key, setCall }) => {
 
   const keyRec = async () => {
     history.push(`/key-search/${input.replace(' ', '-')}`);
-    // setOpen(true);
-
-    // let data_input = JSON.stringify({
-    //   search_key: input,
-    // });
-
-    // let config = {
-    //   method: 'post',
-    //   url: '/workflow/recommend_home/',
-    //   headers: {
-    //     Authorization: `Bearer ${localStorage.getItem('token')}`,
-    //     'Content-Type': 'application/json',
-    //   },
-    //   data: data_input,
-    // };
-
-    // try {
-    //   const response = await axios(config);
-    //   console.log(response.data.details);
-    //   setInputData(response.data.details);
-    //   setData(response.data.details);
-    //   setOpen(false);
-
-    // } catch (error) {
-    //   console.log(error);
-    //   setOpen(false);
-    // }
   };
 
   return (
@@ -125,23 +92,7 @@ const Reccomended = ({ call = false, key, setCall }) => {
         </Box>
       </Box>
       <Box>
-        {inputData.length > 0 ? (
-          inputData.map((rPaper) => (
-            <PaperCard
-              title={rPaper.title[0]}
-              authors={rPaper.authors}
-              // date={rPaper.date == '-' ? '2020-7-1' : rPaper.date}
-              abstract={rPaper.abstract ? rPaper.abstract : '-'}
-              key={rPaper.url + rPaper.title[0]}
-              url={rPaper.url}
-              references={rPaper.references}
-              // doi={rPaper.doi != '-' ? rPaper.doi : '2901/29124'}
-              publisher={rPaper.publisher ? rPaper.publisher : '-'}
-              bookmarked={bookmarked}
-              setBookmarked={setBookmarked}
-            />
-          ))
-        ) : data ? (
+        {data ? (
           data.map((rPaper) => (
             <PaperCard
               title={rPaper.title[0]}

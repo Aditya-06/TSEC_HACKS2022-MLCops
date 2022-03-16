@@ -1,9 +1,6 @@
 import { Box } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PaperCard from './Card';
-import axios from 'axios';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
 
 const UploadRes = ({ data = [] }) => {
   return (

@@ -7,18 +7,15 @@ import {
   Container,
   Grid,
   Paper,
-  Typography,
 } from '@mui/material';
 import Navigation from '../components/Navigation';
-import Searchbar from '../components/Searchbar';
-import Reccomended from '../components/Reccomended';
 import HomeSearch from '../components/HomeSearch';
 import logo from '../logo.gif';
 
 const mdTheme = createTheme();
 
 function DashboardContent() {
-  const [key, setKey] = useState('');
+  const [key] = useState('');
   const [call, setCall] = useState(false);
   return (
     <ThemeProvider theme={mdTheme}>

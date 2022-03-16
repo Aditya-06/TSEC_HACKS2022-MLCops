@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Button, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import axios from 'axios';
 
 const Searchbar = ({ setCall, setKey }) => {
   const [input, setInput] = useState('');
