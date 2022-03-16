@@ -19,7 +19,7 @@ import Graph from '../components/Graph';
 const mdTheme = createTheme();
 
 const LearnMore = () => {
-  const [data, setData] = useState(JSON.parse(localStorage.getItem('rPaper')));
+  const [data] = useState(JSON.parse(localStorage.getItem('rPaper')));
 
   return (
     <ThemeProvider theme={mdTheme}>

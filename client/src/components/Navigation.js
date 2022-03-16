@@ -8,12 +8,10 @@ import {
   Typography,
   Divider,
   IconButton,
-  Badge,
 } from '@mui/material';
 import {
   Menu as MenuIcon,
   ChevronLeft as ChevronLeftIcon,
-  Notifications as NotificationsIcon,
   LoginTwoTone as LoginIcon,
 } from '@mui/icons-material';
 import { mainListItems, secondaryListItems } from './ListItems';

@@ -39,6 +39,7 @@ const Domain = () => {
 
     try {
       const response = await axios(config);
+      console.log(response.data);
       addToast('Saved!', { appearance: 'success' });
     } catch (error) {
       console.log(error);

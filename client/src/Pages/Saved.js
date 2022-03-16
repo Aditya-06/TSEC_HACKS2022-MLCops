@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {
   CssBaseline,
@@ -8,9 +8,7 @@ import {
   Grid,
   Paper,
   Typography,
-  Button,
 } from '@mui/material';
-import axios from 'axios';
 
 import Navigation from '../components/Navigation';
 import SavedPapers from '../components/SavedPapers';

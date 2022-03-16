@@ -8,12 +8,6 @@ import Alphabets from './Alphabet';
 
 const DomainList = ({ selected, setSelected }) => {
   const [open, setOpen] = React.useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleToggle = () => {
-    setOpen(!open);
-  };
   const [resDomaina, setResDomaina] = useState([]);
   // const [selected, setSelected] = useState([]);
   const callGlobalDomains = async () => {
@@ -55,7 +49,7 @@ const DomainList = ({ selected, setSelected }) => {
       const resObj = response.data.details;
       const idArr = getIds(resObj);
       // eslint-disable-next-line no-debugger
-    
+
       setSelected(idArr);
     } catch (error) {
       console.log(error);

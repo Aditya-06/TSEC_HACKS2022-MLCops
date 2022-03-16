@@ -7,11 +7,9 @@ import {
   Container,
   Grid,
   Paper,
-  Typography,
 } from '@mui/material';
 
 import Navigation from '../components/Navigation';
-import DomainList from '../components/DomainList';
 import ProfileInfo from '../components/ProfileInfo';
 
 const mdTheme = createTheme();

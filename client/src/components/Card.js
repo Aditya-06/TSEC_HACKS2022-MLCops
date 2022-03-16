@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Box from '@mui/material/Box';
 import { Divider, Grid } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -141,6 +140,7 @@ export default function PaperCard({
 
     try {
       const response = await axios(config);
+      console.log(response);
       localStorage.setItem('bookmarked', JSON.stringify(store));
       setBooked(true);
     } catch (error) {

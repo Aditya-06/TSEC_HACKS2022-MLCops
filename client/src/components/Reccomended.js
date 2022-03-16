@@ -7,12 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 const Reccomended = ({ call = false, key, setCall }) => {
   const [open, setOpen] = React.useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleToggle = () => {
-    setOpen(!open);
-  };
+
   const [data, setData] = useState([]);
   const [bookmarked, setBookmarked] = useState(
     JSON.parse(localStorage.getItem('bookmarked'))

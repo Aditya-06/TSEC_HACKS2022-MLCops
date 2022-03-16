@@ -1,35 +1,8 @@
-import React, { useState } from 'react';
-import {
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Divider,
-  Stack,
-  Button,
-} from '@mui/material';
-import InboxIcon from '@mui/icons-material/Inbox';
-import DraftsIcon from '@mui/icons-material/Drafts';
+import React from 'react';
+import { Divider, Stack, Button } from '@mui/material';
 import { Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-
-// const data = [
-//   { id: 23, name: 'Acturials' },
-//   { id: 24, name: 'Architecture' },
-//   { id: 35, name: 'Archeology' },
-//   { id: 42, name: 'Ancient' },
-// ];
-
-const selectedArray = [24];
-
-const flexContainer = {
-  display: 'flex',
-  flexDirection: 'row',
-  padding: 0,
-  margin: '2rem 0',
-};
 
 const Alphabets = ({ letter = 'A', data = [], selected, setSelected }) => {
   // const [selected, setSelected] = useState(selectedArray);

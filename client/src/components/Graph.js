@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
 import Graph from 'react-graph-vis';
 import axios from 'axios';
-import { CompressOutlined } from '@mui/icons-material';
 import { useHistory } from 'react-router-dom';
-import { data } from 'vis-network';
-
-// import './styles.css';
-// import './network.css';
 
 const options = {
   layout: {
@@ -124,7 +118,7 @@ function GraphPage() {
             edges: data.details.edges,
           },
           events: {
-            select: ({ nodes, edges }) => {
+            select: ({ nodes }) => {
               // alert('Selected node: ' + getname(data.details.nodes, nodes));
               localStorage.setItem(
                 'author',
